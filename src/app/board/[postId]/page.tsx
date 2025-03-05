@@ -1,8 +1,11 @@
 export default async function BoardPage({
   params,
 }: {
-  params: { postId: string };
+  params: Promise<{
+    postId: string
+  }>
 }) {
-  const { postId } = await params;
-  return <div>{postId}</div>;
+  const { postId } = await params
+  console.log(postId)
+  return <div>{postId}</div>
 }
