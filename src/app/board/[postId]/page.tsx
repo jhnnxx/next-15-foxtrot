@@ -6,6 +6,6 @@ export default async function BoardPage({
   }>
 }) {
   const { postId } = await params
-  console.log(postId)
+  console.log('postId:', postId)
   return <div>{postId}</div>
 }
