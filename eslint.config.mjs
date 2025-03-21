@@ -1,28 +1,37 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-import reactHooks from "eslint-plugin-react-hooks";
+import { FlatCompat } from '@eslint/eslintrc'
+import tseslint from '@typescript-eslint/eslint-plugin'
+import reactHooks from 'eslint-plugin-react-hooks'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-});
+})
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  // React Hooks 플러그인 추가
+  ...compat.extends(
+    'next/core-web-vitals',
+    'next/typescript',
+    'plugin:@typescript-eslint/recommended',
+  ),
   {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"], // 적용할 파일 확장자
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], // 적용할 파일 확장자
     plugins: {
-      "react-hooks": reactHooks,
+      'react-hooks': reactHooks,
+      '@typescript-eslint': tseslint,
     },
     rules: {
-      "react-hooks/rules-of-hooks": "error", // Hook 규칙 강제
-      "react-hooks/exhaustive-deps": "warn", // 종속성 배열 검사
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
     },
   },
-];
+]
 
-export default eslintConfig;
+export default eslintConfig

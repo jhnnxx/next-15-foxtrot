@@ -1,3 +1,5 @@
+import BoardList from '@/components/board/BoardList'
+
 export default async function BoardPage({
   params,
 }: {
@@ -7,5 +9,5 @@ export default async function BoardPage({
 }) {
   const { postId } = await params
   console.log('postId:', postId)
-  return <div>{postId}</div>
+  return <BoardList postId={postId} />
 }
